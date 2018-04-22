@@ -1,0 +1,351 @@
+body {
+    margin: 0;
+    height: 100vh;
+
+    --fg-primary: rgba(255, 255, 255, 1.0);
+    --fg-secondary: rgb(180, 180, 180);
+    --bg-primary: rgb(48, 48, 48);
+    --bg-secondary: rgb(68, 68, 68);
+    --bg-tertiary: rgb(32, 32, 32);
+
+    --fg-highlighted: rgb(240, 0, 0);
+    --fg-warning: rgb(240, 64, 64);
+    --shade: rgba(0, 0, 0, 0.75);
+
+    --max-width: 800px;
+
+    background-color: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    overflow-x: hidden; /* SO: 16670931 */
+}
+
+* {
+    color: var(--fg-primary);
+    font-family: 'Roboto', sans-serif;
+    transition: 0.5s cubic-bezier(0, 0.75, 0.25, 1);
+}
+
+.monospace {
+    font-family: 'Roboto Mono', monospace;
+}
+
+.hidden {
+    display: none;
+}
+
+.transparent {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.no-interaction {
+    pointer-events: none;
+}
+
+#click-area {
+    cursor: pointer;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
+
+#end-reached {
+    text-align: center;
+    color: var(--fg-secondary);
+    margin: 32px;
+}
+
+/* Main containers */
+
+#notification-container {
+    align-items: center;
+    background-color: var(--shade);
+    display: flex;
+    font-size: 14px;
+    height: 100%;
+    justify-content: center;
+    left: 0px;
+    position: fixed;
+    text-align: center;
+    top: 0px;
+    width: 100%;
+    z-index: 10;
+}
+
+#notification-box {
+    background-color: var(--bg-primary);
+    text-align: center;
+    width: 400px;
+    position: relative;
+    padding: 8px;
+}
+
+#header-container {
+    width: 100%;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    overflow-y: scroll;
+    padding-right: 15px;
+
+    border-bottom: 4px solid var(--fg-secondary);
+}
+
+#header {
+    padding-left: 6px;
+    padding-right: 6px;
+    width: 100%;
+    max-width: var(--max-width);
+    height: 32px;
+    display: flex;
+    align-items: center;
+}
+
+
+#content-container {
+    background-color: var(--bg-tertiary);
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+#messages-container {
+    padding-bottom: 32px;
+    max-width: var(--max-width);
+    width: 100%;
+}
+
+.message-container:last-child {
+    margin-bottom: 32px;
+}
+
+#select-container {
+    background-color: var(--bg-secondary);
+    width: 200px;
+    overflow: hidden;
+    height: 20px;
+    position: relative;
+    user-select: none;
+    -moz-user-select: none; /* I trusted you, Firefox */
+}
+
+#search-container {
+    width: 200px;
+}
+
+/* Header and notification shade */
+
+#select-container select {
+    background-color: var(--bg-secondary);
+    border: none;
+    width: 220px;
+}
+
+#select-container div {
+    font-size: 12px;
+    pointer-events: none;
+    position: absolute;
+    right: 6px;
+    top: 2px;
+}
+
+#status-bar {
+    color: var(--fg-secondary);
+    flex: 1;
+    font-size: 12px;
+    text-align: center;
+    height: 12px;
+    margin: 0 4px 0 4px;
+}
+
+/* SO: 3790935 */
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+#search-container input {
+    background-color: var(--bg-secondary);
+    border: none;
+    font-size: 12px;
+    height: 19px;
+    margin: 0;
+    padding: 0;
+    padding-top: 1px;
+    resize: none;
+    text-align: center;
+    width: 200px;
+}
+
+#notification-warning {
+    margin: auto;
+}
+
+#okay-button {
+    font-size: 12px;
+    width: 100px;
+    margin: 8px auto auto auto;
+}
+
+/* Message */
+
+.message-container {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.message, .edit {
+    background-color: var(--bg-primary);
+    display: flex;
+    width: calc(100% - 8px);
+    padding: 4px;
+}
+
+.edits-container {
+    overflow-y: hidden;
+}
+
+.edit {
+    margin-bottom: 1px;
+}
+
+.highlighted {
+    border-left: 4px solid var(--fg-highlighted);
+}
+
+/* Avatar and counter */
+
+.avatar {
+    height: 48px;
+    width: 48px;
+    margin: 4px;
+}
+
+.avatar img {
+    height: 48px;
+    width: 48px;
+    margin: 0;
+    padding: 0;
+}
+
+.counter {
+    font-size: 18px;
+    text-align: center;
+    width: 48px;
+    margin: 4px;
+}
+
+/* Combo container (name, time sent, message text) */
+
+.combo-container {
+    flex: 1;
+    margin: 4px;
+    padding-bottom: 4px;
+}
+
+.name {
+    margin-bottom: 4px;
+}
+
+.username {
+    font-size: 18px;
+}
+
+.bot-tag {
+    background-color: #7289da;
+    border-radius: 2px;
+    font-size: 10px;
+    margin-right: 8px;
+    padding: 0 3px 0 3px;
+}
+
+.discriminator {
+    color: var(--fg-secondary);
+    font-size: 10px;
+    margin: 0 8px 0 4px;
+}
+
+.date {
+    color: var(--fg-secondary);
+    font-size: 10px;
+}
+
+.deleted {
+    color: var(--fg-warning);
+}
+
+.message-embeds {
+    font-size: 10px;
+}
+
+.message-text {
+    word-break: break-all;
+}
+
+.message-text div {
+    display: none;
+}
+
+.message-text .focused {
+    display: initial;
+}
+
+
+/* Snowflakes and message display buttons */
+
+.snowflakes-display {
+    width: 220px;
+    margin: 4px;
+}
+
+.snowflake {
+    color: var(--fg-secondary);
+    text-align: right;
+    font-size: 10px;
+}
+
+.snowflake span {
+    color: var(--fg-secondary);
+}
+
+.display-container {
+    display: flex;
+}
+
+.display-container div {
+    flex: 1;
+}
+
+.button {
+    background-color: var(--bg-secondary);
+    border: 2px solid rgba(0, 0, 0, 0);
+    cursor: pointer;
+    font-size: 10px;
+    margin: 2px;
+    padding: 2px;
+    text-align: center;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.button:active {
+    transition: none;
+    border: 2px solid var(--fg-primary);
+}
+
+.enabled-button {
+    border: 2px solid var(--fg-primary);
+}
+
+.unavailable {
+    opacity: 0.25;
+    pointer-events: none;
+}

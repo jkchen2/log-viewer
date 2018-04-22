@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+<link href="styles.css" rel="stylesheet">
+<script src="script.js"></script>
+
+<head>
+    <meta charset="utf-8">
+    <title>Message Log Viewer</title>
+</head>
+
+<body onload="main()">
+
+    <div id="notification-container" class="transparent">
+        <div id="click-area" onclick="closeMessage()"></div>
+        <div id="notification-box">
+            <img src="warning.svg" id="notification-warning">
+            <div id="notification-text"></div>
+            <div class="button" id="okay-button" onclick="closeMessage()">Okay</div>
+        </div>
+    </div>
+
+    <div id="header-container">
+        <div id="header">
+            <div id="select-container"><select id="channel-selector" onchange="showChannelData()"></select><div>&#9660;</div></div>
+            <div id="status-bar" class="button" onclick="showGuildInfo()">---</div>
+            <div id="search-container"><input class="monospace" type="number" onkeyup="highlightMessages()" placeholder="Highlight user ID"></textarea></div>
+        </div>
+    </div>
+
+    <div id="content-container">
+
+        <div id="messages-container">
+
+            <div id="end-reached">There are no more messages available.</div>
+
+            <div class="message-container template hidden" data-message="0">
+                <div class="edits-container">
+                    <div class="edit">
+                        <div class="counter monospace">3</div>
+                        <div class="combo-container">
+                            <div class="name"><span class="date"></span></div>
+                            <div class="message-text">
+                                <div class="message-content"></div>
+                                <div class="message-embeds monospace focused"></div>
+                            </div>
+                        </div>
+                        <div class="snowflakes-display">
+                            <div class="display-container">
+                                <div class="button unavailable" onclick="showMessageData(this, 0); recalculateHeight(this)">Content</div>
+                                <div class="button unavailable" onclick="showMessageData(this, 1); recalculateHeight(this)">Embeds</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="message">
+                    <div class="avatar"><a href="" target="_blank"><img src="" onerror="if (this.src != 'discord_logo.png') this.src = 'discord_logo.png';"></a></div>
+                    <div class="combo-container">
+                        <div class="name">
+                            <span class="username"></span><span class="discriminator monospace"></span><span class="bot-tag monospace">BOT</span><span class="date"></span>
+                            <div class="date deleted hidden"></div>
+                        </div>
+                        <div class="message-text">
+                            <div class="message-content focused"></div>
+                            <div class="message-embeds monospace"></div>
+                            <div class="message-attachments"></div>
+                        </div>
+                    </div>
+                    <div class="snowflakes-display">
+                        <div class="snowflake user-id">User ID: <span class="monospace"></span></div>
+                        <div class="snowflake message-id">Message ID: <span class="monospace"></span></div>
+                        <div class="button unavailable" onclick="toggleEdits(this)"></div>
+                        <div class="display-container">
+                            <div class="button unavailable" onclick="showMessageData(this, 0)">Content</div>
+                            <div class="button unavailable" onclick="showMessageData(this, 1)">Embeds</div>
+                            <div class="button unavailable" onclick="showMessageData(this, 2)">Attachments</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
