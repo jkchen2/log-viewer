@@ -1,5 +1,5 @@
 const VERSION = 1;
-const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
+const CORS_PROXY = 'https://cors.bridged.cc/';
 
 // Sorry
 var startData = {'fetched': false};
