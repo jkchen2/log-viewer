@@ -1,5 +1,5 @@
 const VERSION = 1;
-const CORS_PROXY = 'https://cors.bridged.cc/';
+const CORS_PROXY = 'https://dacp.jshboxspace.workers.dev/?url=';
 
 // Sorry
 var startData = {'fetched': false};
